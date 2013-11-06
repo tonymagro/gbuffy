@@ -1,0 +1,118 @@
+.TH GBUFFY 1 "October 10, 2003"
+.\"
+.SH NAME
+gbuffy \- watch multiple mailboxes for new mail
+.\"
+.\"
+.SH SYNOPSIS
+.BR "gbuffy [options]"
+.\"
+.\"
+.SH DESCRIPTION
+This manual page was written for the Debian GNU/Linux distribution
+because the original program does not have a manual page.
+.PP
+.B GBuffy
+is a graphical "biff" program
+written for the GTK+ framework.
+It displays a list of mailboxes,
+highlighting any mailboxes
+which contain new mail.
+It will also display
+the number of new messages
+in each monitored mailbox.
+It can monitor mailboxes
+in multiple formats,
+on multiple servers
+(using IMAP or NNTP).
+.PP
+Pressing the first mouse button (usually the left mouse button)
+on a mailbox with new mail
+will display the Sender and Subject
+of each new message.
+Additionally,
+.B GBuffy
+will display the X-Face header
+for messages which have them.
+.PP
+Pressing the second mouse button (usually the middle mouse button)
+on a mailbox will launch
+an external command
+which can be configured
+separately for each mailbox.
+.PP
+Pressing the third mouse button (usually the right mouse button)
+anywhere in the
+.B GBuffy
+window
+will bring up the configuration dialog box,
+where you can add
+new mailboxes to monitor,
+or change the monitoring and display settings
+for the mailboxes you are
+currently monitoring.
+.\" TODO: add a description of the features of the configuration dialog
+box
+.PP
+.B
+GBuffy
+is capable of watching
+mbox, MMDF, maildir, and MH mailboxes (folders).
+There is also support for
+monitoring remote IMAPv4rev1 mailboxes
+and NNTP newsgroups (on servers supporting XOVER).
+.\"
+.\"
+.SH OPTIONS
+The standard
+.B -geometry
+option for X is supported.
+.B GBuffy
+has no options of its own.
+.\"
+.\"
+.SH FILES
+.\"
+.\"
+.TP
+.B ~/.gbuffyc
+holds the list of mailboxes to monitor
+and their associated settings.
+This file is maintained by
+.B GBuffy
+and should not be edited by hand.
+.\" TODO: what about gtkrc or similar?
+.\"
+.\"
+.SH NOTES
+.PP
+Currently,
+.B GBuffy
+is
+.I alpha
+code.
+It is fairly stable,
+but it may contain memory leaks.
+Not all features
+are exhaustively tested.
+.PP
+.B GBuffy
+is conceptually based on
+.B XBuffy
+by Bill Pemberton,
+but it is a complete rewrite from scratch.
+.\"
+.\"
+.SH "SEE ALSO"
+.BR biff (1),
+.BR xbuffy (1),
+.BR X (1).
+.\"
+.\"
+.SH AUTHOR
+Brandon Long <blong@fiction.net>
+.PP
+This manual page was written by
+Era Eriksson <http://www.iki.fi/era/>
+for the Debian project,
+but may be used by others.

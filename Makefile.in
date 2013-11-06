@@ -1,0 +1,80 @@
+# 
+# GBuffy Makefile
+#
+
+SHELL=/bin/sh
+VERSION=@VERSION@
+
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+bindir=@bindir@
+libdir=@libdir@
+mandir=@mandir@
+srcdir=@srcdir@
+VPATH=@srcdir@
+@SET_MAKE@
+
+INSTALL=@INSTALL@
+CC=@CC@
+XCPPFLAGS=-I. `@GTK_CONFIG@ --cflags` @GAPPLET_INCLUDE@ @CPPFLAGS@
+CFLAGS=@CFLAGS@ $(XCPPFLAGS)
+LDFLAGS=-L/usr/local/lib @LDFLAGS@
+LIBS=`@GTK_CONFIG@ --libs` @GAPPLET_LIBS@ -lPropList @LIBS@
+
+OBJS = config.o count.o from.o gbconfig.o gbuffy.o lib.o rfc2047.o system.o \
+       msocket.o imap.o gtklib.o nntp.o newsrc.o @LIBOBJS@
+CLEANFILES=gbuffy @LED@ *.o *~
+
+all: gbuffy 
+
+gbuffy: $(OBJS)
+	$(CC) -o gbuffy $(OBJS) $(LIBS)
+
+config.h.in: $(srcdir)/acconfig.h
+	autoheader
+
+config.h: $(srcdir)/config.h.in
+	./config.status
+
+changelog:
+	rcs2log | cat - ChangeLog > ChangeLog.$$$$ && mv ChangeLog.$$$$ ChangeLog
+
+dep: Makefile
+	mv Makefile Makefile.bak
+	awk -f $(srcdir)/depend.awk < Makefile.bak > Makefile
+	echo '# DO NOT REMOVE THIS LINE' >> Makefile
+	$(CC) -MM $(XCPPFLAGS) $(srcdir)/*.c >> Makefile
+
+install: gbuffy
+	./mkinstalldirs $(bindir)
+	$(INSTALL) gbuffy $(bindir)
+
+clean: 
+	(cd $(srcdir) && rm -f $(CLEANFILES))
+
+distclean: clean
+	(cd $(srcdir) && rm -f config.cache config.log config.status \
+		Makefile config.h  tags)
+
+libcompface/libcompface.a:
+	(cd libcompface && $(MAKE) CC="$(CC)" CFLAGS="$(CFLAGS)")
+
+GB_DISTDIR = gbuffy-$(VERSION)
+GB_LABEL = GBUFFY-`echo $(VERSION) | sed -e 's/\./_/g'`
+gbuffy_dist:
+	rm -rf $(GB_DISTDIR)
+	cvs -q tag -F $(GB_LABEL)
+	mkdir -p $(GB_DISTDIR)
+	cvs -z3 -q export -r $(GB_LABEL) -d $(GB_DISTDIR) gbuffy
+	-rm -rf $(GB_DISTDIR)/CVS
+	cd $(GB_DISTDIR); ./autogen.sh
+	$(MAKE) -C $(GB_DISTDIR)
+	gzip $(GB_DISTDIR)/gbuffy 
+	mv $(GB_DISTDIR)/gbuffy.gz gbuffy-$(VERSION).gz
+	$(MAKE) -C $(GB_DISTDIR) distclean
+	cd $(GB_DISTDIR); ./configure --enable-applet
+	$(MAKE) -C $(GB_DISTDIR)
+	gzip $(GB_DISTDIR)/gbuffy 
+	mv $(GB_DISTDIR)/gbuffy.gz gbuffy-applet-$(VERSION).gz
+	$(MAKE) -C $(GB_DISTDIR) distclean
+	tar chozf gbuffy-$(VERSION).tar.gz $(GB_DISTDIR)

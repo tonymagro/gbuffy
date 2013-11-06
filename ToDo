@@ -1,0 +1,5 @@
+
+- xbuffy auto-detected mailbox types, should gbuffy?
+- don't check mbox/mmdf type folders if locked
+- implement imap/nntp counting code
+- dnd for changing the order of the mailboxes

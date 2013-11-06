@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=GBuffy
+Comment=GBuffy
+Exec=gbuffy --activate-goad-server=gbuffy
+Icon=my_icon.xpm
+Terminal=0
+Type=Application

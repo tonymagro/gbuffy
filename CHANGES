@@ -1,0 +1,45 @@
+0.2.6
+  - SSL Support from Eivind Tagseth <eivindt@multinet.no>
+  - fixes from debian
+    - don't display Vertical button in applet mode
+    - manpage from Era Eriksson
+    - fix for duplicating xface on imap mailboxes
+    - new default command
+  - better support for mh folders (.mh_sequences and .sylpheed_mark)
+  - bugfix: display headers for new mail in maildir folders
+  - bugfix: fix Courier IMAP support
+
+0.2.5
+  - Some more fixes for segfaults in the config/PLSave() code.
+  - patch from Erik Jacobsen (erik@mint.com) to fix geometry code
+  - don't display all new messages, just the latest that fit on screen
+
+0.2.4
+  - Fix for bug in polling
+
+0.2.3
+  - Fix bug in IMAP handling where we should handle wrapped lines
+  - support for --geometry directive 
+      (Erik Forsberg, forsberg@lysator.liu.se)
+  - Support to be built as a GNOME Applet
+  - Support for multiple "rows"
+
+0.2.2
+ - Fix bug where mbox count isn't updated if the file disappears
+ - Fix bug in mh/maildir counting
+ - Fix bug where under certain circumstances we wouldn't save all the 
+   values for imap/nntp folders
+ - Fix debian bug #40877: X-Face header shown reverse left-right
+
+0.2.1
+ - Fix bug under Solaris where st_mtime is a #define
+
+0.2.0
+ - Bug fixes
+ - NNTP and IMAP mailbox support
+ - Update for newer versions of GTK+
+ - ability to change the order of the mailboxes from the configuration
+   dialog
+
+0.1.0
+ - Initial version

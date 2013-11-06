@@ -1,0 +1,67 @@
+{
+  mailboxes = (
+    {
+      type = mbox;
+      title = Incoming;
+      path = "/var/spool/mail/blong1";
+      command = "rxvt -rv -e mutt";
+    },
+    {
+      type = mbox;
+      title = Received;
+      path = "~/Mail/received";
+      command = "rxvt -rv -e mutt -f =received";
+    },
+    {
+      type = mbox;
+      title = P6SysDebug;
+      path = "~/Mail/p6sysdebug";
+      command = "rxvt -rv -e mutt -f =p6sysdebug";
+    },
+    {
+      type = mbox;
+      title = Mendocino;
+      path = "~/Mail/dl2";
+      command = "rxvt -rv -e mutt -f =dl2";
+    },
+    {
+      type = mbox;
+      title = DSD;
+      path = "~/Mail/dsd";
+      command = "rxvt -rv -e mutt -f =dsd";
+    },
+    {
+      type = mbox;
+      title = "Intel General ";
+      path = "~/Mail/igeneral";
+      command = "rxvt -rv -e mutt -f =igeneral";
+    },
+    {
+      type = mbox;
+      title = ECG;
+      path = "~/Mail/ecg";
+      command = "rxvt -rv -e mutt -f =ecg";
+    },
+    {
+      type = mbox;
+      title = FES;
+      path = "~/Mail/fes";
+      command = "rxvt -rv -e mutt -f =fes";
+    },
+    {
+      type = mbox;
+      title = PTD;
+      path = "~/Mail/ptd";
+      command = "rxvt -rv -e mutt -f =ptd";
+    },
+    {
+      type = mbox;
+      title = Tuna;
+      path = "~/Mail/tuna";
+      command = "rxvt -rv -e mutt -f =tuna";
+    }
+  );
+  vertical = false;
+  polltime = 10;
+  maildir = "/home/blong/Mail";
+}

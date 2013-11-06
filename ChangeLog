@@ -1,0 +1,242 @@
+2003-10-10  Brandon Long  <blong@pulp>
+
+	* config.c, gbuffy.c, gbuffy.h: some imaps port fixes
+
+	* gtklib.c: fix coredump when you cancel the imap password dialog
+
+	* acconfig.h, config.h.in, configure, configure.in:
+	add --enable-dfile flag to enable debug (couldn't use enable-debug, autoconf wouldn't let me)
+
+	* acconfig.h, config.c, config.h.in, configure, configure.in, gbconfig.c, gbuffy.h, imap.c, msocket.c, msocket.h:
+	ssl support from Eivind Tagseth <eivindt@multinet.no>
+
+	* imap.c:
+	clear headers so we don't get duplication of xface on imap, from Toby Speight via debian
+
+	* gbuffy.1: man page from Era Eriksson via debian
+
+	* gbuffy.c: new default mailbox command from debian
+
+	* gbconfig.c:
+	disable Vertical config if we're an applet (from Cyrille Chepelov via debian)
+
+	* gbuffy.c, gbuffy.h: no subject patch from Diego
+
+	* ChangeLog, imap.c, libcompface/cmain.c: fixes from Grant Edwards
+
+	* count.c:
+	support .sylpheed_mark and .mh_sequences for mh folders, and fix bug where we didn't show any headers for maildir folders
+
+2003-10-06  Grant Edwards <grante@visi.com>
+
+        * gbuffy.c: made debug file non-buffered.
+        
+        * gbuffy.c: fixed g_print() of position data so it
+          compiles.
+          
+        * imap.c: fixed parsing of STATUS response to tolerate
+          servers that return mailbox name in quotes.
+          
+        * imap.c: changed default value from 0 to 1 for
+          starting seq number for FETCH command.  First message
+          is 1: 0 isn't legal.
+          
+        * libcompface/cmain.c: got rid of obsolete usage of
+          errno/sys_errlist and replaced it with strerror().
+
+
+2001-05-15  Brandon Long  <blong@pulp>
+
+	* gbuffy.c: oops, register poll first
+
+2001-03-22  Brandon Long  <blong@non>
+
+	* configure, configure.in, Makefile.in:
+	fix for case where we aren't building the applet
+
+	* acconfig.h, aclocal.m4, CHANGES, config.c, config.h.in, configure, configure.in, gbconfig.c, gbuffy.c, gbuffy.desktop, gbuffy.gnorba, gbuffy.h, imap.c, Makefile.in:
+	support to build as a GNOME applet
+
+	* gbuffy.c: try to maintain position...
+
+2000-10-21  Brandon Long  <blong@non>
+
+	* count.c: Don't double add the new to maildir path
+
+2000-01-09  Brandon Long  <blong@non>
+
+	* README: Change README to version 0.2.3
+
+	* config.c, count.c, from.c, gbconfig.c, gbuffy.h, gtklib.c, gtklib.h, imap.c, nntp.c:
+	Fix -Wall warnings
+
+	* gbuffy.c:
+	New -geometry parsing code from Erik Forsberg <forsberg@lysator.liu.se>
+
+1999-08-20  Brandon Long  <blong@non>
+
+	* count.c:
+	if stat fails and we had messages before, we don't have them now
+
+1999-08-02  Brandon Long  <blong@non>
+
+	* ChangeLog, CHANGES: For version 0.2.2
+
+	* xfaceviewer: add another ascii image viewer
+
+	* xfaceviewer:
+	shell script to extract an X-Face header from a file and display it
+	using various tools.  Useful for a program like mutt.
+
+	* gbuffy.c:
+	Fix debian bug # 40877, the xface header is reversed (hard to tell on a
+	face, but apparently the following small 'e' didn't work:
+	X-Face: +Qsu;P5#YFS#6y2P?[c.3/h=%S1hO(k^ehU0]?L|y'1JzyRsI|Kp};
+
+	* ChangeLog: Updated change log for release
+
+	* gbconfig.c, imap.c: save all entries on save/close
+	ignore imap boxes with no server
+
+	* count.c:
+	fix bug where zero length file causes us to not update the count
+
+1999-01-14  Brandon Long  <blong@non>
+
+	* count.c: Fix bugs in mh counting
+	Hmm, at some point, we probably need to handle .mh_sequences
+
+1999-01-13  Brandon Long  <blong@non>
+
+	* Makefile.in: Add install target
+
+	* ChangeLog, CHANGES: updated for version 0.2.1
+
+	* nntp.c: Fixing bugs in NNTP support
+	- subject/from parsing backwards in XOVER
+	- increase size of buffer for reading XOVER
+	- not quite stepping the line right in XOVER
+
+1999-01-11  Brandon Long  <blong@non>
+
+	* count.c, gbuffy.h, ChangeLog, Makefile.in:
+	- rcs2log entry for creating a ChangeLog
+	- fixed bug where st_mtime is a #define under Solaris
+
+	* configure.in, configure, autogen.sh, Makefile.in:
+	Makefile/autoconf changes for 0.2 release
+
+	* nntp.c, lib.c, newsrc.c, gtkrc.example, imap.c, gbuffy.h, gtkrc, gbuffy.c, count.c, gbconfig.c, README, config.c, BUGS, Makefile.in:
+	Added NNTP mailbox support
+	Changed STRING_LEN to STRING
+	Updated README for 0.20 release
+	Updated config dialogs to support IMAP and NNTP mailboxes
+	Changed From/Subject dialog popup back to XBuffy style, where it goes
+	  away when you release the button.  Probably add a variable to control
+	  this later (on some window managers, you automatically get the leave
+	  notification with the popup, which negates the paradigm we were
+	  shooting for)
+	Renamed gtkrc to gtkrc.example as GTK+ now sources ~/.gtkrc
+	Removed call to gtk_rc_parse(), as GTK+ now sources ~/.gtkrc automatically
+	Fixed a couple bugs in the config save routines to prevent bad config
+	  files from being written (shouldn't libproplist handle this?)
+
+Mon Jan 11 22:12:07 1999  Brandon Long  <blong@non>
+
+	* count.c, gbuffy.h, ChangeLog, Makefile.in:
+	- rcs2log entry for creating a ChangeLog
+	- fixed bug where st_mtime is a #define under Solaris
+
+	* configure.in, configure, autogen.sh, Makefile.in:
+	Makefile/autoconf changes for 0.2 release
+
+	* nntp.c, lib.c, newsrc.c, gtkrc.example, imap.c, Attic/gtkrc, gbuffy.h, gbuffy.c, count.c, gbconfig.c, README, config.c, BUGS, Makefile.in:
+	Added NNTP mailbox support
+	Changed STRING_LEN to STRING
+	Updated README for 0.20 release
+	Updated config dialogs to support IMAP and NNTP mailboxes
+	Changed From/Subject dialog popup back to XBuffy style, where it goes
+	  away when you release the button.  Probably add a variable to control
+	  this later (on some window managers, you automatically get the leave
+	  notification with the popup, which negates the paradigm we were
+	  shooting for)
+	Renamed gtkrc to gtkrc.example as GTK+ now sources ~/.gtkrc
+	Removed call to gtk_rc_parse(), as GTK+ now sources ~/.gtkrc automatically
+	Fixed a couple bugs in the config save routines to prevent bad config
+	  files from being written (shouldn't libproplist handle this?)
+
+Sat Jan  9 08:21:38 1999  Brandon Long  <blong@non>
+
+	* up.xpm, msocket.c, msocket.h, imap.c, lib.c, gbuffy.h, gtklib.c, gtklib.h, gbuffy.c, down.xpm, gbconfig.c, ToDo, config.c, count.c, Makefile.in:
+	IMAP is now supported
+	configuration now saves/loads server/port/login
+	added support for rearranging the list of mailboxes
+
+Tue Nov 10 08:25:17 1998  Brandon Long  <blong@non>
+
+	* Makefile.in, configure.in:
+	Fixed compilation bug by renaming the compface directory libcompface
+
+	* config.c:
+	Fixed bug reported by Vikas Agnihotri <VikasA@att.com> where gbuffy
+	would never write the ~/.gbuffyrc file since it wasn't expanded.
+
+Fri Oct  9 09:27:40 1998  Brandon Long  <blong@non>
+
+	* utimes.c, ChangeLog, LICENSE, README: *** empty log message ***
+
+	* libcompface/Attic/Makefile: - Makefile now generated from Makefile.in
+
+	* system.c, Attic/gtkrc, gbuffy.h, gbconfig.c, gbuffy.c, configure.in, convert.pl, configure, config.c, config.h.in, Makefile.in, acconfig.h:
+	- fix bug where only first x-face is shown
+	- now support changing maildir and polltime from config window
+	- support middle mouse button to launch command
+
+	* libcompface/compface.h, libcompface/Attic/Makefile, libcompface/Makefile.in:
+	- configure code now handles compface library
+
+	* gbuffy.c, snprintf.c, gbconfig.c, configure.in, convert.pl, count.c, configure, config.h.in, ToDo, acconfig.h, config.c, BUGS, GBuffy, Makefile.in:
+	- Now compiles on AIX
+	- added snprintf.c code as AIX doesn't have snprintf.  Can remove when
+	  we go to glib 1.1 which has g_snprintf()
+	- split out configuration code into its own file
+	- configure code now handles compface library
+	- added quick perl script to convert xbuffy boxfiles
+
+Sat Sep 26 23:46:46 1998  Brandon Long  <blong@non>
+
+	* Attic/strdup.c, gbuffy.h, gbuffy.c, count.c, gbconfig.c, GBuffy, ToDo:
+	Prettied up the pop-up display
+	keep pop-up around if the mouse pointer leaves the button before release
+	invert the x-face bitmap
+	first pass at delete, it causes a segfault though
+	use STATE_SELECTED for mailboxes with new mail
+
+	* libcompface/file.c, libcompface/gen.c, libcompface/uncmain.c, libcompface/uncompface.c:
+	First CVS Version
+
+	* libcompface/file.c, libcompface/gen.c, libcompface/uncmain.c, libcompface/uncompface.c:
+	Initial revision
+
+	* Attic/strdup.c, libcompface/Attic/Makefile, libcompface/README, libcompface/arith.c, libcompface/cmain.c, libcompface/compface.1, libcompface/compface.3, libcompface/compface.c, libcompface/compface.h, libcompface/compress.c, libcompface/data.h, utimes.c:
+	First CVS Version
+
+	* Attic/strdup.c, libcompface/Attic/Makefile, libcompface/README, libcompface/arith.c, libcompface/cmain.c, libcompface/compface.1, libcompface/compface.3, libcompface/compface.c, libcompface/compface.h, libcompface/compress.c, libcompface/data.h, utimes.c:
+	Initial revision
+
+	* GBuffy, count.c, depend.awk, install-sh, lib.c, mkinstalldirs, nntp.c, rfc2047.c, rfc2047.h:
+	First CVS Version
+
+	* GBuffy, count.c, depend.awk, install-sh, lib.c, mkinstalldirs, nntp.c, rfc2047.c, rfc2047.h:
+	Initial revision
+
+	* configure, configure.in, gbconfig.c: First CVS Version
+
+	* configure, configure.in, gbconfig.c: Initial revision
+
+	* CHANGES, Makefile.in, ToDo, acconfig.h, config.h.in, from.c, gbuffy.c, gbuffy.h:
+	First CVS Version
+
+	* CHANGES, Makefile.in, ToDo, acconfig.h, config.h.in, from.c, gbuffy.c, gbuffy.h:
+	Initial revision
+
